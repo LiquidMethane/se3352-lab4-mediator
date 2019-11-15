@@ -16,15 +16,12 @@ import java.util.*;
 
 public class Controller implements Initializable {
 
-    List<Employee> employees;
+    EmployeeList employeeList;
+
     List<String> countries;
     List<String[]>provinces;
     List<String[]>cities;
 
-
-    public List<Employee> getEmployees() {
-        return employees;
-    }
 
     private int calculateNumberOfLines(File file) throws FileNotFoundException {
         int wc = 0;
@@ -127,24 +124,17 @@ public class Controller implements Initializable {
             cities.add(parseCity(city));
         }
 
-        for (String[] province: provinces) {
-            System.out.println(province[0] + "      " + province[1]);
-        }
-
-        for (String[] city: cities) {
-            System.out.println(city[0] + "      " + city[1] + "      " + city[2]);
-        }
-
-    }
-
-    private void populateEmployeeProfile() {
-        employees.add(new Employee(239847, "John Doe", "Canada", "Alberta", "Edmonton", "1h2 h3g", "1000 This St"));
-        employees.add(new Employee(348956, "Jane Doe", "Canada", "Ontario", "Cornwall", "2a3 b4c", "2000 That St"));
-        employees.add(new Employee(798347, "Jannie Doe", "United Kingdom", "Doncaster", "Doncaster", "3d4 e5f", "3000 Another St"));
-        employees.add(new Employee(893656, "Jean Doe", "United States", "Pennsylvania", "Lincoln", "34532", "4000 The Other St"));
-
+//        for (String[] province: provinces) {
+//            System.out.println(province[0] + "      " + province[1]);
+//        }
+//
+//        for (String[] city: cities) {
+//            System.out.println(city[0] + "      " + city[1] + "      " + city[2]);
+//        }
 
     }
+
+
 
     @FXML
     private void addNewProfile() throws IOException {
@@ -153,7 +143,7 @@ public class Controller implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddNewEmployee.fxml"));
         Parent addNewProfile = (Parent) fxmlLoader.load();
         AddNewEmployeeController addNewEmployeeController = (AddNewEmployeeController) fxmlLoader.getController();
-        addNewEmployeeController.setModel(employees, countries, provinces, cities);
+        addNewEmployeeController.setModel(employeeList, countries, provinces, cities);
 
         Scene scene = new Scene(addNewProfile);
         Stage stage = new Stage();
@@ -172,7 +162,7 @@ public class Controller implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ModEmployee.fxml"));
         Parent modProfile = (Parent) fxmlLoader.load();
         ModEmployeeController modEmployeeController = (ModEmployeeController) fxmlLoader.getController();
-        modEmployeeController.setModel(employees, countries, provinces, cities);
+        modEmployeeController.setModel(employeeList, countries, provinces, cities);
 
         Scene scene = new Scene(modProfile);
         Stage stage = new Stage();
@@ -191,8 +181,8 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        employees = new LinkedList<>();
-        populateEmployeeProfile();
+        employeeList = new EmployeeList();
+        employeeList.populate();
 
         try {
             loadData();

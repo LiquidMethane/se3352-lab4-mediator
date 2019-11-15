@@ -42,12 +42,12 @@ public class AddNewEmployeeController implements Initializable {
     @FXML
     private Button cancelBtn;
 
-    private List<Employee> employees;
+    private EmployeeList employeeList;
     private List<String> countries;
     private List<String[]> provinces, cities;
 
-    void setModel(List<Employee> employees, List<String> countries, List<String[]> provinces, List<String[]> cities) {
-        this.employees = employees;
+    void setModel(EmployeeList employeeList, List<String> countries, List<String[]> provinces, List<String[]> cities) {
+        this.employeeList = employeeList;
         this.countries = countries;
         this.provinces = provinces;
         this.cities = cities;
@@ -105,13 +105,7 @@ public class AddNewEmployeeController implements Initializable {
         }
     }
 
-    public void displayEmployees() {
-        for (Employee emp: employees) {
-            System.out.println(emp.getEid() + "\t" + emp.getName());
-            System.out.println(emp.getCountry() + "\t" + emp.getProv() + "\t" + emp.getCity());
-            System.out.println(emp.getPostcode() + "\t" + emp.getAddr() + "\n\n");
-        }
-    }
+
 
     @FXML
     private void save(javafx.event.ActionEvent e) {
@@ -124,9 +118,9 @@ public class AddNewEmployeeController implements Initializable {
                 postCode.getText(),
                 addr.getText());
 
-        employees.add(employee);
+        employeeList.add(employee);
         cancel(e);
-        displayEmployees();
+        employeeList.display();
     }
 
     @FXML

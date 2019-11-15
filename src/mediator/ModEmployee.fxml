@@ -62,13 +62,13 @@
                         <Font size="20.0" />
                     </font>
                 </Label>
-                <TextField fx:id="name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <TextField fx:id="postCode" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                <TextField fx:id="addr" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                <ComboBox fx:id="countryChoice" prefHeight="26.0" prefWidth="554.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <ComboBox fx:id="provChoice" prefHeight="26.0" prefWidth="544.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                <ComboBox fx:id="cityChoice" prefHeight="26.0" prefWidth="606.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <ComboBox fx:id="eidChoice" prefHeight="26.0" prefWidth="526.0" GridPane.columnIndex="1" />
+                <TextField fx:id="name" GridPane.columnIndex="1" GridPane.rowIndex="1" onAction="#handleEvent" />
+                <TextField fx:id="postCode" GridPane.columnIndex="1" GridPane.rowIndex="5" onAction="#handleEvent" />
+                <TextField fx:id="addr" GridPane.columnIndex="1" GridPane.rowIndex="6" onAction="#handleEvent" />
+                <ComboBox fx:id="countryChoice" prefHeight="26.0" prefWidth="554.0" GridPane.columnIndex="1" GridPane.rowIndex="2" onAction="#handleEvent" />
+                <ComboBox fx:id="provChoice" prefHeight="26.0" prefWidth="544.0" GridPane.columnIndex="1" GridPane.rowIndex="3" onAction="#handleEvent" />
+                <ComboBox fx:id="cityChoice" prefHeight="26.0" prefWidth="606.0" GridPane.columnIndex="1" GridPane.rowIndex="4" onAction="#handleEvent" />
+            <ComboBox fx:id="eidChoice" prefHeight="26.0" prefWidth="526.0" GridPane.columnIndex="1" onAction="#handleEvent" />
             </children>
         </GridPane>
         <GridPane layoutX="560.0" layoutY="555.0" prefHeight="30.0" prefWidth="190.0">

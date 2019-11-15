@@ -45,20 +45,17 @@ public class ModEmployeeController implements Initializable {
     @FXML
     private Button delBtn;
 
-    private List<Employee> employees;
+    private EmployeeList employeeList;
     private List<String> countries;
     private List<String[]> provinces, cities;
 
-    void setModel(List<Employee> employees, List<String> countries, List<String[]> provinces, List<String[]> cities) {
-        this.employees = employees;
+    void setModel(EmployeeList employeeList, List<String> countries, List<String[]> provinces, List<String[]> cities) {
+        this.employeeList = employeeList;
         this.countries = countries;
         this.provinces = provinces;
         this.cities = cities;
-        //countryChoice.setItems(FXCollections.observableArrayList(countries));
-        List<Integer> eidList = new LinkedList<>();
-        for (Employee employee: employees) {
-            eidList.add(employee.getEid());
-        }
+        List<Integer> eidList = employeeList.getEidList();
+        System.out.println(eidList);
         eidChoice.setItems(FXCollections.observableArrayList(eidList));
     }
 
@@ -72,17 +69,26 @@ public class ModEmployeeController implements Initializable {
 
 
         if (widget == eidChoice && eidChoice.getValue() != null) {
-            Employee temp = null;
-            int eid = (Integer)eidChoice.getValue();
-            for (Employee emp: employees) {
-                if (emp.getEid() == eid) temp = emp;
-                break;
-            }
+            System.out.print("eid set");
+            Employee temp = employeeList.find((Integer)eidChoice.getValue());
+
+            //set name, addr and postcode
             name.setText(temp.getName());
+            addr.setText(temp.getAddr());
+            postCode.setText(temp.getPostcode());
+            name.setDisable(false);
+            addr.setDisable(false);
+            postCode.setDisable(false);
+
+            //enable delete button
+            delBtn.setDisable(false);
+
+            //build country combobox
             countryChoice.setItems(FXCollections.observableArrayList(countries));
             countryChoice.setValue(temp.getCountry());
             countryChoice.setDisable(false);
 
+            //build province combobox
             List<String> provinceList = new LinkedList<>();
             for (String[] str: provinces) {
                 if (str[0].equals(temp.getCountry())) {
@@ -93,11 +99,22 @@ public class ModEmployeeController implements Initializable {
             provChoice.setValue(temp.getProv());
             provChoice.setDisable(false);
 
-            //provChoice.setItems();
 
-        }
+            //build city combobox
+            List<String> cityList = new LinkedList<>();
+            for (String[] str: cities) {
+                if (str[0].equals(temp.getCountry()) && str[1].equals(temp.getProv())) {
+                    cityList.add(str[2]);
+                }
+            }
+            cityChoice.setItems(FXCollections.observableArrayList(cityList));
+            cityChoice.setValue(temp.getCity());
+            cityChoice.setDisable(false);
 
-        if (widget == countryChoice && countryChoice.getValue() != null) {
+
+
+
+        } else if (widget == countryChoice && countryChoice.getValue() != null) {
             String country = (String)countryChoice.getValue();
             List<String> provinceList = new LinkedList<>();
             for (String[] str: provinces) {
@@ -142,7 +159,16 @@ public class ModEmployeeController implements Initializable {
 
     @FXML
     private void save(javafx.event.ActionEvent e) {
+        Employee employee = new Employee((Integer)eidChoice.getValue(),
+                name.getText(),
+                (String)countryChoice.getValue(),
+                (String)provChoice.getValue(),
+                (String)cityChoice.getValue(),
+                postCode.getText(),
+                addr.getText());
 
+        employeeList.modify(employee);
+        cancel(e);
     }
 
     @FXML
@@ -152,7 +178,7 @@ public class ModEmployeeController implements Initializable {
 
     @FXML
     private void delete(javafx.event.ActionEvent e) {
-
+        employeeList.remove((Integer)eidChoice.getValue());
     }
 
     @Override
