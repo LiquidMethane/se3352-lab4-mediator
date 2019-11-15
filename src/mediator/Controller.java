@@ -1,10 +1,17 @@
 package mediator;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
@@ -43,17 +50,31 @@ public class Controller implements Initializable {
         while (sc.hasNextLine()) {
             provinces.add(sc.nextLine());
         }
+
         sc = new Scanner(CityFile);
         while (sc.hasNextLine()) {
             cities.add(sc.nextLine());
         }
 
-        //System.out.println(provinces);
     }
 
     @FXML
-    private void addNewProfile() {
+    private void addNewProfile() throws IOException {
         //TODO
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddNewEmployee.fxml"));
+        Parent addNewProfile = (Parent) fxmlLoader.load();
+        AddNewEmployeeController addNewEmployeeController = (AddNewEmployeeController) fxmlLoader.getController();
+        addNewEmployeeController.setModel(employees, countries, provinces, cities);
+
+        Scene scene = new Scene(addNewProfile);
+        Stage stage = new Stage();
+
+        stage.setScene(scene);
+        stage.setTitle("Add New Profile");
+        stage.initModality(Modality.APPLICATION_MODAL);
+
+        stage.show();
     }
 
     @FXML
