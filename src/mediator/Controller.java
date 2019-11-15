@@ -21,19 +21,6 @@ public class Controller implements Initializable {
     List<String[]>provinces;
     List<String[]>cities;
 
-//    public void addEmployee(Employee employee) {
-//        employees.add(employee);
-//    }
-//
-//    public void modifyEmployee(Employee employee) {
-//        for (Employee emp: employees) {
-//            if (emp.getEid() == employee.getEid()) {
-//                emp = employee;
-//            }
-//        }
-//    }
-
-
 
     public List<Employee> getEmployees() {
         return employees;
@@ -147,6 +134,15 @@ public class Controller implements Initializable {
         for (String[] city: cities) {
             System.out.println(city[0] + "      " + city[1] + "      " + city[2]);
         }
+
+    }
+
+    private void populateEmployeeProfile() {
+        employees.add(new Employee(123456, "John Doe", "Canada", "Alberta", "Edmonton", "1h2 h3g", "1000 This St"));
+        employees.add(new Employee(234567, "Jane Doe", "Canada", "Ontario", "Cornwall", "2a3 b4c", "2000 That St"));
+        employees.add(new Employee(345678, "Jannie Doe", "United Kingdom", "Doncaster", "Doncaster", "3d4 e5f", "3000 Another St"));
+        employees.add(new Employee(456789, "Jean Doe", "United States", "Pennsylvania", "Lincoln", "34532", "4000 The Other St"));
+
 
     }
 

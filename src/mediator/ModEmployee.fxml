@@ -63,7 +63,7 @@
                     </font>
                 </Label>
                 <TextField fx:id="name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <TextField fx:id="postcode" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <TextField fx:id="postCode" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                 <TextField fx:id="addr" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                 <ComboBox fx:id="countryChoice" prefHeight="26.0" prefWidth="554.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <ComboBox fx:id="provChoice" prefHeight="26.0" prefWidth="544.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
