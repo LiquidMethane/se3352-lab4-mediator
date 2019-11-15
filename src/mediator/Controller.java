@@ -138,10 +138,10 @@ public class Controller implements Initializable {
     }
 
     private void populateEmployeeProfile() {
-        employees.add(new Employee(123456, "John Doe", "Canada", "Alberta", "Edmonton", "1h2 h3g", "1000 This St"));
-        employees.add(new Employee(234567, "Jane Doe", "Canada", "Ontario", "Cornwall", "2a3 b4c", "2000 That St"));
-        employees.add(new Employee(345678, "Jannie Doe", "United Kingdom", "Doncaster", "Doncaster", "3d4 e5f", "3000 Another St"));
-        employees.add(new Employee(456789, "Jean Doe", "United States", "Pennsylvania", "Lincoln", "34532", "4000 The Other St"));
+        employees.add(new Employee(239847, "John Doe", "Canada", "Alberta", "Edmonton", "1h2 h3g", "1000 This St"));
+        employees.add(new Employee(348956, "Jane Doe", "Canada", "Ontario", "Cornwall", "2a3 b4c", "2000 That St"));
+        employees.add(new Employee(798347, "Jannie Doe", "United Kingdom", "Doncaster", "Doncaster", "3d4 e5f", "3000 Another St"));
+        employees.add(new Employee(893656, "Jean Doe", "United States", "Pennsylvania", "Lincoln", "34532", "4000 The Other St"));
 
 
     }
@@ -166,8 +166,22 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    private void modifyProfile() {
+    private void modifyProfile() throws IOException {
         //TODO
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ModEmployee.fxml"));
+        Parent modProfile = (Parent) fxmlLoader.load();
+        ModEmployeeController modEmployeeController = (ModEmployeeController) fxmlLoader.getController();
+        modEmployeeController.setModel(employees, countries, provinces, cities);
+
+        Scene scene = new Scene(modProfile);
+        Stage stage = new Stage();
+
+        stage.setScene(scene);
+        stage.setTitle("Modify Profile");
+        stage.initModality(Modality.APPLICATION_MODAL);
+
+        stage.show();
     }
 
     @FXML
@@ -178,6 +192,7 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         employees = new LinkedList<>();
+        populateEmployeeProfile();
 
         try {
             loadData();

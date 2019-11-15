@@ -2,15 +2,18 @@ package mediator;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class ModEmployeeController {
+public class ModEmployeeController implements Initializable {
 
     @FXML
     private ComboBox eidChoice;
@@ -51,7 +54,12 @@ public class ModEmployeeController {
         this.countries = countries;
         this.provinces = provinces;
         this.cities = cities;
-        countryChoice.setItems(FXCollections.observableArrayList(countries));
+        //countryChoice.setItems(FXCollections.observableArrayList(countries));
+        List<Integer> eidList = new LinkedList<>();
+        for (Employee employee: employees) {
+            eidList.add(employee.getEid());
+        }
+        eidChoice.setItems(FXCollections.observableArrayList(eidList));
     }
 
     @FXML
@@ -61,6 +69,33 @@ public class ModEmployeeController {
 
     public void widgetChanged(javafx.scene.control.Control widget) {
         System.out.println("widget changed...");
+
+
+        if (widget == eidChoice && eidChoice.getValue() != null) {
+            Employee temp = null;
+            int eid = (Integer)eidChoice.getValue();
+            for (Employee emp: employees) {
+                if (emp.getEid() == eid) temp = emp;
+                break;
+            }
+            name.setText(temp.getName());
+            countryChoice.setItems(FXCollections.observableArrayList(countries));
+            countryChoice.setValue(temp.getCountry());
+            countryChoice.setDisable(false);
+
+            List<String> provinceList = new LinkedList<>();
+            for (String[] str: provinces) {
+                if (str[0].equals(temp.getCountry())) {
+                    provinceList.add(str[1]);
+                }
+            }
+            provChoice.setItems(FXCollections.observableArrayList(provinceList));
+            provChoice.setValue(temp.getProv());
+            provChoice.setDisable(false);
+
+            //provChoice.setItems();
+
+        }
 
         if (widget == countryChoice && countryChoice.getValue() != null) {
             String country = (String)countryChoice.getValue();
@@ -118,5 +153,17 @@ public class ModEmployeeController {
     @FXML
     private void delete(javafx.event.ActionEvent e) {
 
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        name.setDisable(true);
+        countryChoice.setDisable(true);
+        provChoice.setDisable(true);
+        cityChoice.setDisable(true);
+        postCode.setDisable(true);
+        addr.setDisable(true);
+        saveBtn.setDisable(true);
+        delBtn.setDisable(true);
     }
 }
