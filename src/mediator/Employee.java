@@ -10,6 +10,17 @@ public class Employee {
     private String postcode;
     private String addr;
 
+    public Employee(int eid, String name, String country, String prov, String city, String postcode, String addr) {
+        this.eid = eid;
+        this.name = name;
+        this.country = country;
+        this.prov = prov;
+        this.city = city;
+        this.postcode = postcode;
+        this.addr = addr;
+    }
+
+
     public int getEid() {
         return eid;
     }
