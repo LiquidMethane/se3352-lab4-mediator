@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.MenuBar;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -15,6 +16,9 @@ import java.net.URL;
 import java.util.*;
 
 public class Controller implements Initializable {
+
+    @FXML
+    private MenuBar menu;
 
     EmployeeList employeeList;
 
@@ -34,7 +38,6 @@ public class Controller implements Initializable {
     }
 
     private static String[] parseCity(String str) {
-        //manta[0] is country, manta[1] is province and city together
 
         String[] mantaRay = new String[3];
         for (int i = 0; i < str.length(); i++) {
@@ -175,8 +178,9 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    private void close() {
+    private void close(javafx.event.ActionEvent e) {
         //TODO
+        ((Stage) menu.getScene().getWindow()).close();
     }
 
     @Override
