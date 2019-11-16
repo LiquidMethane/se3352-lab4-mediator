@@ -179,6 +179,7 @@ public class ModEmployeeController implements Initializable {
     @FXML
     private void delete(javafx.event.ActionEvent e) {
         employeeList.remove((Integer)eidChoice.getValue());
+        cancel(e);
     }
 
     @Override
